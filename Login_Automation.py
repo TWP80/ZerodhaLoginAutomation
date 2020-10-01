@@ -43,31 +43,17 @@ options.add_argument("start-maximized")
 options.add_argument("disable-infobars")
 options.add_argument("--disable-extensions")
 
+# write your User Id
+loginid = "AB1234"
+# write your Password
+password = "abc@123"
+# write your PIN
+loginpin = "123456"
 
-# In[ ]:
-
-
-#identify login section
-form = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="login-form"]//form')))
-#enter the ID
-driver.find_element_by_xpath("//*[@type='text']").send_keys("Your User Id Here")
-#enter the password
-driver.find_element_by_xpath("//*[@type='password']").send_keys("Your Password Here")
-#submit
-driver.find_element_by_xpath("//*[@type='submit']").click()
-#import time
-import time
-from selenium.common.exceptions import NoSuchElementException
-#sleep for a second so that the page can submit and proceed to upcoming question (2fa)
-time.sleep(1)
-#identify login section for 2fa
-form = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="login-form"]//form')))
-#enter the 2fa code
-driver.find_element_by_xpath("//*[@type='password']").send_keys("2 Factor Authentication Here")
-#submit
-driver.find_element_by_xpath("//*[@type='submit']").click()
-#import time
-import time
-from selenium.common.exceptions import NoSuchElementException
-time.sleep(1)
-
+def loginkite():
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID,"userid"))).send_keys(loginid)
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID,"password"))).send_keys(password)
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//*[@type='submit']"))).click()
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID,"pin"))).send_keys(loginpin)
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//*[@type='submit']"))).click()
+loginkite()
